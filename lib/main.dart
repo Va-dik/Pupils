@@ -51,9 +51,9 @@ class _HomePageState extends State<HomePage> {
         onTap: _onTabTapped,
         currentIndex: _currentIndex,
         items: [
-          BottomNavigationBarItem(icon: Icon(Icons.group, color: _color0,), title: Text('Учащиеся',) ),
-          BottomNavigationBarItem(icon: Icon(Icons.person, color: _color1,), title: Text('Рандоамайзер')),
-          BottomNavigationBarItem(icon: Icon(Icons.chair, color: _color2,), title: Text('Журнал'))
+          BottomNavigationBarItem(icon: Icon(Icons.group, color: _color0,), label: 'Учащиеся'),
+          BottomNavigationBarItem(icon: Icon(Icons.person, color: _color1,),label: 'Рандоамайзер'),
+          BottomNavigationBarItem(icon: Icon(Icons.chair, color: _color2,), label: 'Журнал')
         ],
       ),
     );
@@ -75,6 +75,8 @@ class _HomePageState extends State<HomePage> {
       {
         _bgColor = Colors.blue[200];
       }
+      
+SystemChrome.setEnabledSystemUIOverlays([]);
     });
   }
 }
