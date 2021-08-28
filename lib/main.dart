@@ -1,7 +1,7 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:pupils/pages.dart';
+import 'package:pupils/students.dart';
 
 void main() => runApp(MyApp());
 
@@ -24,6 +24,10 @@ class MyApp extends StatelessWidget {
             brightness: Brightness.dark,
           ),
           body: HomePage()),
+          routes: <String, WidgetBuilder>
+          {
+            '/a': (BuildContext context) => HomePage()
+          }
     );
   }
 }
@@ -40,20 +44,37 @@ class _HomePageState extends State<HomePage> {
   Color _color0 = Colors.red;
   Color _color1 = Colors.green;
   Color _color2 = Colors.blue;
+  int _pageIndex = 0;
+  var list = [FirstPage(), SecondPage(), ThirdPage()];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      body: list[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
-        
         backgroundColor: _bgColor,
         selectedIconTheme: IconThemeData(color: Colors.blue, size: 35),
         onTap: _onTabTapped,
         currentIndex: _currentIndex,
         items: [
-          BottomNavigationBarItem(icon: Icon(Icons.group, color: _color0,), label: 'Учащиеся'),
-          BottomNavigationBarItem(icon: Icon(Icons.person, color: _color1,),label: 'Рандоамайзер'),
-          BottomNavigationBarItem(icon: Icon(Icons.chair, color: _color2,), label: 'Журнал')
+          BottomNavigationBarItem(
+              icon: Icon(
+                Icons.group,
+                color: _color0,
+              ),
+              label: 'Учащиеся'),
+          BottomNavigationBarItem(
+              icon: Icon(
+                Icons.person,
+                color: _color1,
+              ),
+              label: 'Рандоамайзер'),
+          BottomNavigationBarItem(
+              icon: Icon(
+                Icons.chair,
+                color: _color2,
+              ),
+              label: 'Журнал')
         ],
       ),
     );
@@ -63,20 +84,17 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       _currentIndex = index;
 
-      if(_currentIndex == 0)
-      {
+      if (_currentIndex == 0) {
         _bgColor = Colors.red[200];
-      }
-      else if(_currentIndex == 1)
-      {
+      } else if (_currentIndex == 1) {
         _bgColor = Colors.green[200];
-      }
-      else if(_currentIndex == 2)
-      {
+      } else if (_currentIndex == 2) {
         _bgColor = Colors.blue[200];
+        // Navigator.push(context,
+        //     MaterialPageRoute(builder: (BuildContext context) {
+        //   return students();
+        // }));
       }
-      
-SystemChrome.setEnabledSystemUIOverlays([]);
     });
   }
 }
