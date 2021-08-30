@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:pupils/pages.dart';
-import 'package:pupils/students.dart';
 
 void main() => runApp(MyApp());
 
@@ -38,8 +37,8 @@ class _HomePageState extends State<HomePage> {
   Color? _bgColor = Colors.red[200];
   Color _color0 = Colors.red;
   Color _color1 = Colors.green;
-  Color _color2 = Colors.blue;
-  var list = [FirstPage(), SecondPage(), ThirdPage()];
+  var list = [FirstPage(), SecondPage()];
+  var colorList = [Colors.amber];
 
   @override
   Widget build(BuildContext context) {
@@ -63,12 +62,6 @@ class _HomePageState extends State<HomePage> {
                 color: _color1,
               ),
               label: 'Рандомайзер'),
-          BottomNavigationBarItem(
-              icon: Icon(
-                Icons.chair,
-                color: _color2,
-              ),
-              label: 'Журнал')
         ],
       ),
     );
@@ -82,8 +75,6 @@ class _HomePageState extends State<HomePage> {
         _bgColor = Colors.red[200];
       } else if (_currentIndex == 1) {
         _bgColor = Colors.green[200];
-      } else if (_currentIndex == 2) {
-        _bgColor = Colors.blue[200];
         // Navigator.push(context,
         //     MaterialPageRoute(builder: (BuildContext context) {
         //   return students();
