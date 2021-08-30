@@ -24,10 +24,6 @@ class MyApp extends StatelessWidget {
             brightness: Brightness.dark,
           ),
           body: HomePage()),
-          routes: <String, WidgetBuilder>
-          {
-            '/a': (BuildContext context) => HomePage()
-          }
     );
   }
 }
@@ -39,12 +35,10 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _currentIndex = 0;
-  final List<Widget> _children = [];
   Color? _bgColor = Colors.red[200];
   Color _color0 = Colors.red;
   Color _color1 = Colors.green;
   Color _color2 = Colors.blue;
-  int _pageIndex = 0;
   var list = [FirstPage(), SecondPage(), ThirdPage()];
 
   @override
@@ -68,7 +62,7 @@ class _HomePageState extends State<HomePage> {
                 Icons.person,
                 color: _color1,
               ),
-              label: 'Рандоамайзер'),
+              label: 'Рандомайзер'),
           BottomNavigationBarItem(
               icon: Icon(
                 Icons.chair,
