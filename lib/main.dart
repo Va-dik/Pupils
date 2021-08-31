@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pupils/pages.dart';
 
-
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -20,13 +19,14 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _currentIndex = 0;
-  Color? _bgColor = Colors.red[200];
-  List<Widget> _pageList = [FirstPage(), SecondPage()];
+  Color _appColor = Color(0xFFF8F0DA);
+  Color _bgColor = Color(0xE0FF8E8E);
+  List<Widget> _pageList = [Students(), Randomizer()];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFF8F0DA),
+      backgroundColor: _appColor,
           appBar: AppBar(
             backgroundColor: Colors.amber[300],
             title: Text(
@@ -41,7 +41,9 @@ class _HomePageState extends State<HomePage> {
       body: IndexedStack(index: _currentIndex, children: _pageList),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: _bgColor,
-        selectedIconTheme: IconThemeData(color: Colors.blue, size: 35, opacity: 100),
+        selectedIconTheme: IconThemeData(size: 35),
+        selectedItemColor: Colors.blue,
+        selectedLabelStyle: TextStyle(fontWeight: FontWeight.bold),
         onTap: _onTabTapped,
         currentIndex: _currentIndex,
         items: [
@@ -64,13 +66,16 @@ class _HomePageState extends State<HomePage> {
 
   void _onTabTapped(int index) {
     setState(() {
+
       _currentIndex = index;
 
       if (_currentIndex == 0) {
-        _bgColor = Colors.red[200];
+        _bgColor = Color(0xE0FF8E8E);
+        _appColor = Color(0xFFF8F0DA);
       }
       else if (_currentIndex == 1) {
-        _bgColor = Colors.green[200];
+        _bgColor = Color(0xE079FFA1);
+        _appColor = Color(0xFFC2D7FF);
       }
     });
   }

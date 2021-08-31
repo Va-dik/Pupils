@@ -1,6 +1,8 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
-class FirstPage extends StatelessWidget {
+class Students extends StatelessWidget {
   final List<String> _studentsList = [
     'Ахремчик Вадим Дмитриевич',
     'Бесман Ярослав Евгеньевич',
@@ -30,16 +32,27 @@ class FirstPage extends StatelessWidget {
           return Card(
             color: Color(0xFFF0FADA),
             child: ListTile(
-              leading: Text((index + 1).toString(), style: TextStyle(fontSize: 25), textScaleFactor: 2,),
-              title: Text(_studentsList[index]),
-              subtitle: TextField(),
-              isThreeLine: true,
+              leading: Text(
+                (index + 1).toString(),
+                style: TextStyle(fontSize: 25),
+                textScaleFactor: 2,
+              ),
+              title: Text(
+                _studentsList[index],
+                style: TextStyle(color: Colors.deepPurple, fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+              subtitle: TextField(
+                decoration: InputDecoration(
+                  hintText: 'Отметки',
+                  hintStyle: TextStyle(color: Colors.red),
+                ),
+              ),
               shape: Border(
-        bottom: BorderSide(width: 3, color: Colors.purple),
-        top: BorderSide(width: 3, color: Colors.purple),
-        left: BorderSide(width: 3, color: Colors.purple),
-        right: BorderSide(width: 3, color: Colors.purple),
-      ),
+                bottom: BorderSide(width: 3, color: Colors.purple),
+                top: BorderSide(width: 3, color: Colors.purple),
+                left: BorderSide(width: 3, color: Colors.purple),
+                right: BorderSide(width: 3, color: Colors.purple),
+              ),
             ),
           );
         },
@@ -48,13 +61,9 @@ class FirstPage extends StatelessWidget {
   }
 }
 
-class SecondPage extends StatelessWidget {
+class Randomizer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Center(
-        child: Text('Second Page'),
-      ),
-    );
+    return Container();
   }
 }
