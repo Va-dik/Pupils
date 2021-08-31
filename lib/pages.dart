@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 
-int q = 0;
-
 class FirstPage extends StatelessWidget {
-  List<String> _studentsList = [
+  final List<String> _studentsList = [
     'Ахремчик Вадим Дмитриевич',
     'Бесман Ярослав Евгеньевич',
     'Беспалов Максим Васильевич',
@@ -23,8 +21,6 @@ class FirstPage extends StatelessWidget {
     'Полубинский Кирилл Леонидович'
   ];
 
-List<String> _count = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17'];
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -32,12 +28,18 @@ List<String> _count = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', 
         itemCount: _studentsList.length,
         itemBuilder: (BuildContext context, int index) {
           return Card(
+            color: Color(0xFFF0FADA),
             child: ListTile(
-              leading: Text(_count[index], style: TextStyle(fontSize: 30),),
+              leading: Text((index + 1).toString(), style: TextStyle(fontSize: 25), textScaleFactor: 2,),
               title: Text(_studentsList[index]),
               subtitle: TextField(),
-              trailing: Icon(Icons.favorite),
               isThreeLine: true,
+              shape: Border(
+        bottom: BorderSide(width: 3, color: Colors.purple),
+        top: BorderSide(width: 3, color: Colors.purple),
+        left: BorderSide(width: 3, color: Colors.purple),
+        right: BorderSide(width: 3, color: Colors.purple),
+      ),
             ),
           );
         },
