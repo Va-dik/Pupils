@@ -1,5 +1,5 @@
 import 'dart:ui';
-
+import 'package:flutter/animation.dart';
 import 'package:flutter/material.dart';
 
 class Students extends StatelessWidget {
@@ -39,7 +39,10 @@ class Students extends StatelessWidget {
               ),
               title: Text(
                 _studentsList[index],
-                style: TextStyle(color: Colors.deepPurple, fontSize: 20, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                    color: Colors.deepPurple,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold),
               ),
               subtitle: TextField(
                 decoration: InputDecoration(
@@ -61,9 +64,57 @@ class Students extends StatelessWidget {
   }
 }
 
-class Randomizer extends StatelessWidget {
+class Randomizer extends StatefulWidget {
+  @override
+  _RandomizerState createState() => _RandomizerState();
+}
+
+class _RandomizerState extends State<Randomizer>
+    with SingleTickerProviderStateMixin {
+  List<Color> _colors = List<Color>.generate(
+      8, (index) => index.isOdd ? Colors.deepOrange : Colors.yellow);
+  List<double> _stops = List<double>.generate(8, (index) => index * 0.2 - 0.4);
+
+  late Animation<double> animation;
+  late AnimationController controller;
+
+  @override
+  void initState() {
+    super.initState();
+
+    controller =
+        AnimationController(vsync: this, duration: Duration(milliseconds: 300));
+
+    animation = Tween<double>(begin: .0, end: .4).animate(controller)
+      ..addListener(() {
+        setState(() {});
+      })
+      ..addStatusListener((status) {
+        if (status == AnimationStatus.completed) {
+          controller.reset();
+          controller.forward();
+        } else if (status == AnimationStatus.dismissed) {
+          controller.forward();
+        }
+      });
+    controller.forward();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Align(
+      alignment: Alignment.center,
+        child: Container(
+          height: 200,
+          width: 200,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+          gradient: LinearGradient(
+        colors: _colors,
+        stops: _stops.map((s) => s + animation.value).toList(),
+      )),
+      child: TextButton(onPressed: (){},
+      child: Text('Сгенерировать'),),
+    ));
   }
 }
