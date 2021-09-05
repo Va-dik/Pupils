@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'dart:math';
 
 class Constants {
-  static final List<String> studentsList = [
+  static const List<String> studentsList = [
     'Ахремчик Вадим Дмитриевич',
     'Бесман Ярослав Евгеньевич',
     'Беспалов Максим Васильевич',
@@ -36,35 +36,7 @@ class Students extends StatelessWidget {
       child: ListView.builder(
         itemCount: studentsList.length,
         itemBuilder: (BuildContext context, int index) {
-          return Card(
-            color: Color(0xFFF0FADA),
-            child: ListTile(
-              leading: Text(
-                (index + 1).toString(),
-                style: TextStyle(fontWeight: FontWeight.bold),
-                textScaleFactor: 2.4,
-              ),
-              title: Text(
-                studentsList[index],
-                style: TextStyle(
-                    color: Colors.deepPurple,
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold),
-              ),
-              subtitle: TextField(
-                  decoration: InputDecoration(
-                    hintText: 'Отметки',
-                    hintStyle: TextStyle(color: Colors.red),
-                  ),
-                  keyboardType: TextInputType.phone),
-              shape: Border(
-                bottom: BorderSide(width: 3, color: Colors.purple),
-                top: BorderSide(width: 3, color: Colors.purple),
-                left: BorderSide(width: 3, color: Colors.purple),
-                right: BorderSide(width: 3, color: Colors.purple),
-              ),
-            ),
-          );
+          return Widgets.ourList(studentsList, index);
         },
       ),
     );
@@ -109,58 +81,19 @@ class _RandomizerState extends State<Randomizer>
   }
 
   void _randomizer() {
-    Random _random = Random();
-    int value = _random.nextInt(17) + 1;
+    int value = Random().nextInt(19);
 
     showDialog(
-        context: context,
-        builder: (context) => Dialog(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(40)),
-              child: Container(
-                alignment: Alignment.topCenter,
-                child: ListView.builder(
-                  itemCount: 1,
-                  itemBuilder: (BuildContext context, int index) {
-                    if(value != index){
-                      index = value;
-                    }
-                    else {
-                      index = index;
-                    }
-                    return Card(
-                      color: Color(0xFFF0FADA),
-                      child: ListTile(
-                        leading: Text(
-                          (index + 1).toString(),
-                          style: TextStyle(fontWeight: FontWeight.bold),
-                          textScaleFactor: 2.4,
-                        ),
-                        title: Text(
-                          studentsList[index],
-                          style: TextStyle(
-                              color: Colors.deepPurple,
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        subtitle: TextField(
-                            decoration: InputDecoration(
-                              hintText: 'Отметки',
-                              hintStyle: TextStyle(color: Colors.red),
-                            ),
-                            keyboardType: TextInputType.phone),
-                        shape: Border(
-                          bottom: BorderSide(width: 3, color: Colors.purple),
-                          top: BorderSide(width: 3, color: Colors.purple),
-                          left: BorderSide(width: 3, color: Colors.purple),
-                          right: BorderSide(width: 3, color: Colors.purple),
-                        ),
-                      ),
-                    );
-                  },
-                ),
-              ),
-            ));
+      context: context,
+      builder: (context) => Dialog(
+        backgroundColor: Colors.transparent,
+        child: SingleChildScrollView(
+          child: Container(
+              alignment: Alignment.topCenter,
+              child: Widgets.ourList(studentsList, value)),
+        ),
+      ),
+    );
   }
 
   @override
@@ -190,8 +123,39 @@ class _RandomizerState extends State<Randomizer>
                 ),
               )),
         ),
-        Center()
       ],
     );
+  }
+}
+
+class Widgets {
+  static Widget ourList(List studentsList, int index) {
+    return Container(
+        margin: EdgeInsets.all(8),
+        child: ListTile(
+          leading: Text(
+            (index + 1).toString(),
+            style: TextStyle(fontWeight: FontWeight.bold),
+            textScaleFactor: 2.4,
+          ),
+          title: Text(
+            studentsList[index],
+            style: TextStyle(
+                color: Colors.deepPurple,
+                fontSize: 18,
+                fontWeight: FontWeight.bold),
+          ),
+          subtitle: TextField(
+              decoration: InputDecoration(
+                hintText: 'Отметки',
+                hintStyle: TextStyle(color: Colors.red),
+              ),
+              keyboardType: TextInputType.phone),
+        ),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20),
+          color: Color(0xFFF0FADA),
+          border: Border.all(width: 3, color: Colors.purple),
+        ));
   }
 }
