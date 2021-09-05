@@ -56,8 +56,8 @@ class _HomePageState extends State<HomePage> {
               label: 'Учащиеся'),
           BottomNavigationBarItem(
               icon: Icon(
-                Icons.refresh,
-                color: Colors.green,
+                Icons.shuffle,
+                color: Color(0xFF008B23),
               ),
               label: 'Рандомайзер'),
         ],
