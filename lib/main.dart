@@ -44,6 +44,7 @@ class _HomePageState extends State<HomePage> {
         selectedIconTheme: IconThemeData(size: 35),
         selectedItemColor: Colors.blue,
         selectedLabelStyle: TextStyle(fontWeight: FontWeight.bold),
+        unselectedFontSize: 14,
         onTap: _onTabTapped,
         currentIndex: _currentIndex,
         items: [
@@ -55,7 +56,7 @@ class _HomePageState extends State<HomePage> {
               label: 'Учащиеся'),
           BottomNavigationBarItem(
               icon: Icon(
-                Icons.person,
+                Icons.refresh,
                 color: Colors.green,
               ),
               label: 'Рандомайзер'),
@@ -64,14 +65,14 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  void _onTabTapped(int index) {
+  void _onTabTapped(index) {
     setState(() {
 
       _currentIndex = index;
 
       if (_currentIndex == 0) {
         _bgColor = Color(0xE0FF8E8E);
-        _appColor = Color(0xFFF8F0DA);
+        _appColor = Color(0xFFFFEFC2);
       }
       else if (_currentIndex == 1) {
         _bgColor = Color(0xE079FFA1);
