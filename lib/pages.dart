@@ -26,7 +26,7 @@ class Constants {
     'Сёмкин Кирилл Дмитриевич'
   ];
 
-  static const List<String> secondGroupLiist = [
+  static const List<String> secondGroupList = [
     'Николаевич Ангелина Ивановна',
     'Пашковский Артём Николаевич',
     'Поцейко Никита Андреевич',
@@ -49,19 +49,28 @@ class Constants {
 }
 
 class SelectGroup extends StatefulWidget {
-  static List<String> studentsList = Constants.firstGroupList;
   @override
   _SelectGroupState createState() => _SelectGroupState();
 }
 
 class _SelectGroupState extends State<SelectGroup> {
-  
+  static List<String> studentsList = [].cast();
+
   static Object? _value = 1;
 
   void _onChanged(value)
   {
     setState(() {
       _value = value;
+
+      if(_value == 1)
+      {
+        studentsList = Constants.firstGroupList;
+      }
+      else if(_value == 2)
+      {
+        studentsList = Constants.secondGroupList;
+      }
     });
   }
 
@@ -70,6 +79,7 @@ class _SelectGroupState extends State<SelectGroup> {
     return Align(
       alignment: Alignment.center,
       child: Container(
+        alignment: Alignment.center,
         width: 300,
         height: 300,
         color: Colors.orange,
@@ -86,7 +96,6 @@ class _SelectGroupState extends State<SelectGroup> {
 }
 
 class Students extends StatefulWidget {
-
   @override
   _StudentsState createState() => _StudentsState();
 }
@@ -96,9 +105,9 @@ class _StudentsState extends State<Students> {
   Widget build(BuildContext context) {
     return Container(
       child: ListView.builder(
-        itemCount: SelectGroup.studentsList.length,
+        itemCount: _SelectGroupState.studentsList.length,
         itemBuilder: (BuildContext context, int index) {
-          return Widgets.ourList(SelectGroup.studentsList, index);
+          return Widgets.ourList(_SelectGroupState.studentsList, index);
         },
       ),
     );
@@ -155,7 +164,7 @@ class _RandomizerState extends State<Randomizer>
     else if(_SelectGroupState._value == 2)
     {
       numStudents = Random().nextInt(18);
-      studentsList = Constants.secondGroupLiist;
+      studentsList = Constants.secondGroupList;
     }
 
     showDialog(
@@ -165,7 +174,7 @@ class _RandomizerState extends State<Randomizer>
         child: SingleChildScrollView(
           child: Container(
               alignment: Alignment.topCenter,
-              child: Widgets.ourList(studentsList, numStudents)),
+              child: IndexedStack(children: [Widgets.ourList(studentsList, numStudents)])),
         ),
       ),
     );

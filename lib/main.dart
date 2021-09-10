@@ -21,7 +21,6 @@ class _HomePageState extends State<HomePage> {
   int _currentIndex = 0;
   Color _appColor = Color(0xFFF8F0DA);
   Color _bgColor = Color(0xE0FF8E8E);
-  List<Widget> _pageList = [SelectGroup(), Students(), Randomizer()];
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +36,7 @@ class _HomePageState extends State<HomePage> {
         centerTitle: true,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
       ),
-      body: IndexedStack(index: _currentIndex, children: _pageList),
+      body: IndexedStack(index: _currentIndex, children: [SelectGroup(), Students(), Randomizer()]),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: _bgColor,
         selectedIconTheme: IconThemeData(size: 35),
@@ -50,7 +49,7 @@ class _HomePageState extends State<HomePage> {
           BottomNavigationBarItem(
             icon: Icon(
               Icons.list,
-              color: Colors.yellow,
+              color: Color(0xFFAC6CFF),
               ),
               label: 'Группа'),
           BottomNavigationBarItem(
@@ -73,8 +72,11 @@ class _HomePageState extends State<HomePage> {
   void _onTabTapped(index) {
     setState(() {
       _currentIndex = index;
-
-      if (_currentIndex == 1) {
+      if (_currentIndex == 0) {
+        _bgColor = Color(0xFFCCA4FF);
+        
+      }
+      else if (_currentIndex == 1) {
         _bgColor = Color(0xE0FF8E8E);
         _appColor = Color(0xFFFFEFC2);
       } else if (_currentIndex == 2) {
