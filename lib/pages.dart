@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'dart:math';
 
 class Constants {
-  static const List<String> studentsList = [
+  static const List<String> firstGroupList = [
     'Ахремчик Вадим Дмитриевич',
     'Бесман Ярослав Евгеньевич',
     'Беспалов Максим Васильевич',
@@ -25,18 +25,80 @@ class Constants {
     'Полубинский Кирилл Леонидович',
     'Сёмкин Кирилл Дмитриевич'
   ];
+
+  static const List<String> secondGroupLiist = [
+    'Николаевич Ангелина Ивановна',
+    'Пашковский Артём Николаевич',
+    'Поцейко Никита Андреевич',
+    'Прокопышко Никита Кириллович',
+    'Сазановец Станислав Игоревич',
+    'Самулёв Степан Вячеславович',
+    'Сарнавский Артём Геннадьевич',
+    'Свирко Анастасия Сергеевна',
+    'Секацкая Диана Игоревна',
+    'Сидорович Даниил Андреевич',
+    'Старовойтов Максим Игоревич',
+    'Филипеня Денис Александрович',
+    'Фурманов Михаил Дмитриевич',
+    'Чертков Константин Валентинович',
+    'Шарахай Алексей Олегович',
+    'Якимов Антон Русланович',
+    'Якимцев Никита Михайлович',
+    'Ярмоленко Максим Андреевич',
+  ];
 }
 
-class Students extends StatelessWidget {
-  final List<String> studentsList = Constants.studentsList;
+class SelectGroup extends StatefulWidget {
+  static List<String> studentsList = Constants.firstGroupList;
+  @override
+  _SelectGroupState createState() => _SelectGroupState();
+}
 
+class _SelectGroupState extends State<SelectGroup> {
+  
+  static Object? _value = 1;
+
+  void _onChanged(value)
+  {
+    setState(() {
+      _value = value;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Align(
+      alignment: Alignment.center,
+      child: Container(
+        width: 300,
+        height: 300,
+        color: Colors.orange,
+        child: DropdownButton(value: _value,
+        items: [DropdownMenuItem(child: Text('ПОИТ-1'),
+        value: 1,),
+        DropdownMenuItem(child: Text('ПОИТ-2'),
+        value: 2,)],
+        onChanged: _onChanged,
+        )
+      ),
+    );
+  }
+}
+
+class Students extends StatefulWidget {
+
+  @override
+  _StudentsState createState() => _StudentsState();
+}
+
+class _StudentsState extends State<Students> {
   @override
   Widget build(BuildContext context) {
     return Container(
       child: ListView.builder(
-        itemCount: studentsList.length,
+        itemCount: SelectGroup.studentsList.length,
         itemBuilder: (BuildContext context, int index) {
-          return Widgets.ourList(studentsList, index);
+          return Widgets.ourList(SelectGroup.studentsList, index);
         },
       ),
     );
@@ -53,7 +115,6 @@ class _RandomizerState extends State<Randomizer>
   List<Color> _colors = List<Color>.generate(
       8, (index) => index.isOdd ? Color(0xE0EC5EFF) : Color(0xE079FFA1));
   List<double> _stops = List<double>.generate(8, (index) => index * 0.2 - 0.4);
-  final List<String> studentsList = Constants.studentsList;
 
   late Animation<double> animation;
   late AnimationController controller;
@@ -79,9 +140,23 @@ class _RandomizerState extends State<Randomizer>
       });
     controller.forward();
   }
-
+   
   void _randomizer() {
-    int value = Random().nextInt(19);
+    
+    List<String> studentsList = [];
+
+    int numStudents = 0;
+
+    if(_SelectGroupState._value == 1)
+    {
+      numStudents = Random().nextInt(19);
+      studentsList = Constants.firstGroupList;
+    }
+    else if(_SelectGroupState._value == 2)
+    {
+      numStudents = Random().nextInt(18);
+      studentsList = Constants.secondGroupLiist;
+    }
 
     showDialog(
       context: context,
@@ -90,7 +165,7 @@ class _RandomizerState extends State<Randomizer>
         child: SingleChildScrollView(
           child: Container(
               alignment: Alignment.topCenter,
-              child: Widgets.ourList(studentsList, value)),
+              child: Widgets.ourList(studentsList, numStudents)),
         ),
       ),
     );

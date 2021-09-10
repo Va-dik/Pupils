@@ -21,23 +21,22 @@ class _HomePageState extends State<HomePage> {
   int _currentIndex = 0;
   Color _appColor = Color(0xFFF8F0DA);
   Color _bgColor = Color(0xE0FF8E8E);
-  List<Widget> _pageList = [Students(), Randomizer()];
+  List<Widget> _pageList = [SelectGroup(), Students(), Randomizer()];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: _appColor,
-          appBar: AppBar(
-            backgroundColor: Colors.amber[300],
-            title: Text(
-              'Students',
-              style: TextStyle(
-                  color: Colors.red, fontSize: 25, fontWeight: FontWeight.w900),
-            ),
-            centerTitle: true,
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
-          ),
+      appBar: AppBar(
+        backgroundColor: Colors.amber[300],
+        title: Text(
+          'Students',
+          style: TextStyle(
+              color: Colors.red, fontSize: 25, fontWeight: FontWeight.w900),
+        ),
+        centerTitle: true,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+      ),
       body: IndexedStack(index: _currentIndex, children: _pageList),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: _bgColor,
@@ -48,6 +47,12 @@ class _HomePageState extends State<HomePage> {
         onTap: _onTabTapped,
         currentIndex: _currentIndex,
         items: [
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.list,
+              color: Colors.yellow,
+              ),
+              label: 'Группа'),
           BottomNavigationBarItem(
               icon: Icon(
                 Icons.group,
@@ -67,14 +72,12 @@ class _HomePageState extends State<HomePage> {
 
   void _onTabTapped(index) {
     setState(() {
-
       _currentIndex = index;
 
-      if (_currentIndex == 0) {
+      if (_currentIndex == 1) {
         _bgColor = Color(0xE0FF8E8E);
         _appColor = Color(0xFFFFEFC2);
-      }
-      else if (_currentIndex == 1) {
+      } else if (_currentIndex == 2) {
         _bgColor = Color(0xE079FFA1);
         _appColor = Color(0xFFC2D7FF);
       }
