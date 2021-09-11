@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pupils/pages.dart';
 
 void main() => runApp(MyApp());
-
+int currentIndex = 0;
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -18,9 +18,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int _currentIndex = 0;
-  Color _appColor = Color(0xFFF8F0DA);
-  Color _bgColor = Color(0xE0FF8E8E);
+  
+  Color _appColor = Color(0xFFB5FFD1);
+  Color _bgColor = Color(0xFFCCA4FF);
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +36,7 @@ class _HomePageState extends State<HomePage> {
         centerTitle: true,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
       ),
-      body: IndexedStack(index: _currentIndex, children: [SelectGroup(), Students(), Randomizer()]),
+      body: IndexedStack(index: currentIndex, children: [SelectGroup(), Students(), Randomizer()]),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: _bgColor,
         selectedIconTheme: IconThemeData(size: 35),
@@ -44,7 +44,7 @@ class _HomePageState extends State<HomePage> {
         selectedLabelStyle: TextStyle(fontWeight: FontWeight.bold),
         unselectedFontSize: 14,
         onTap: _onTabTapped,
-        currentIndex: _currentIndex,
+        currentIndex: currentIndex,
         items: [
           BottomNavigationBarItem(
             icon: Icon(
@@ -71,18 +71,27 @@ class _HomePageState extends State<HomePage> {
 
   void _onTabTapped(index) {
     setState(() {
-      _currentIndex = index;
-      if (_currentIndex == 0) {
-        _bgColor = Color(0xFFCCA4FF);
-        
-      }
-      else if (_currentIndex == 1) {
+      currentIndex = index;
+
+      switch (currentIndex) {
+        case 0:
+          _bgColor = Color(0xFFCCA4FF);
+        _appColor = Color(0xFFB5FFD1);
+          break;
+
+        case 1:
         _bgColor = Color(0xE0FF8E8E);
         _appColor = Color(0xFFFFEFC2);
-      } else if (_currentIndex == 2) {
+        break;
+
+        case 2:
         _bgColor = Color(0xE079FFA1);
         _appColor = Color(0xFFC2D7FF);
+        break;
+
+        default:
       }
+      
     });
   }
 }

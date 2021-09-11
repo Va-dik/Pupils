@@ -54,7 +54,7 @@ class SelectGroup extends StatefulWidget {
 }
 
 class _SelectGroupState extends State<SelectGroup> {
-  static List<String> studentsList = [].cast();
+  static List<String> studentsList = Constants.firstGroupList;
 
   static Object? _value = 1;
 
@@ -101,6 +101,7 @@ class Students extends StatefulWidget {
 }
 
 class _StudentsState extends State<Students> {
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -122,7 +123,7 @@ class Randomizer extends StatefulWidget {
 class _RandomizerState extends State<Randomizer>
     with SingleTickerProviderStateMixin {
   List<Color> _colors = List<Color>.generate(
-      8, (index) => index.isOdd ? Color(0xE0EC5EFF) : Color(0xE079FFA1));
+      8, (index) => index.isOdd ? Color(0xFFA953C4) : Color(0xFFD8D668));
   List<double> _stops = List<double>.generate(8, (index) => index * 0.2 - 0.4);
 
   late Animation<double> animation;
@@ -196,12 +197,13 @@ class _RandomizerState extends State<Randomizer>
                   )),
               child: TextButton(
                 onPressed: () => setState(() {
+                  
                   _randomizer();
                 }),
                 child: Text(
                   'Сгенерировать',
                   style: TextStyle(
-                      color: Colors.red,
+                      color: Color(0xFF66FF004),
                       fontWeight: FontWeight.bold,
                       fontSize: 20),
                 ),
