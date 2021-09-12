@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:pupils/pages.dart';
 
 void main() => runApp(MyApp());
-int currentIndex = 0;
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -18,7 +17,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  
+  int _currentIndex = 0;
   Color _appColor = Color(0xFFB5FFD1);
   Color _bgColor = Color(0xFFCCA4FF);
 
@@ -36,7 +35,7 @@ class _HomePageState extends State<HomePage> {
         centerTitle: true,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
       ),
-      body: IndexedStack(index: currentIndex, children: [SelectGroup(), Students(), Randomizer()]),
+      body: IndexedStack(index: _currentIndex, children: [SelectGroup(), Students(), Randomizer()]),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: _bgColor,
         selectedIconTheme: IconThemeData(size: 35),
@@ -44,7 +43,7 @@ class _HomePageState extends State<HomePage> {
         selectedLabelStyle: TextStyle(fontWeight: FontWeight.bold),
         unselectedFontSize: 14,
         onTap: _onTabTapped,
-        currentIndex: currentIndex,
+        currentIndex: _currentIndex,
         items: [
           BottomNavigationBarItem(
             icon: Icon(
@@ -71,9 +70,9 @@ class _HomePageState extends State<HomePage> {
 
   void _onTabTapped(index) {
     setState(() {
-      currentIndex = index;
+      _currentIndex = index;
 
-      switch (currentIndex) {
+      switch (_currentIndex) {
         case 0:
           _bgColor = Color(0xFFCCA4FF);
         _appColor = Color(0xFFB5FFD1);
@@ -88,10 +87,7 @@ class _HomePageState extends State<HomePage> {
         _bgColor = Color(0xE079FFA1);
         _appColor = Color(0xFFC2D7FF);
         break;
-
-        default:
       }
-      
     });
   }
 }
