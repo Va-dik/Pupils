@@ -29,7 +29,7 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         backgroundColor: Colors.amber[300],
         title: Text(
-          'Students',
+          'Students Generator',
           style: TextStyle(
               color: Colors.red, fontSize: 25, fontWeight: FontWeight.w900),
         ),
