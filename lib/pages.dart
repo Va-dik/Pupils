@@ -86,9 +86,14 @@ class _SelectGroupState extends State<SelectGroup> {
       height: 300,
       child: Stack(children: [
         Align(
-          alignment: Alignment(0, -0.9),
-          child: Text('Выберите группу', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 23, color: Colors.white),)
-          ),
+            alignment: Alignment(0, -0.9),
+            child: Text(
+              'Выберите группу',
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 23,
+                  color: Colors.white),
+            )),
         Align(
           alignment: Alignment.center,
           child: DropdownButton(
