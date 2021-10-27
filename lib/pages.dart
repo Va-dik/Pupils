@@ -5,47 +5,50 @@ import 'dart:math';
 
 class Constants {
   static const List<String> firstGroupList = [
-    'Ахремчик Вадим Дмитриевич',
-    'Бесман Ярослав Евгеньевич',
-    'Беспалов Максим Васильевич',
-    'Буренков Кирилл Витальевич',
-    'Войтик Никита Александрович',
-    'Горовцов Степан Петрович',
-    'Дащинский Егор Андреевич',
-    'Заяц Александр Иванович',
-    'Клаповщук Илья Андреевич',
-    'Клещиков Антон Сергеевич',
-    'Крючков Тимур Андреевич',
-    'Курилович Никита Дмитриевич',
-    'Ловицкая Анастасия Игоревна',
-    'Марышев Денис Дмитриевич',
-    'Молокова Виктория Геннадьевна',
-    'Мостовой Артём Витальевич',
-    'Оборин Даниил Алексеевич',
-    'Полубинский Кирилл Леонидович',
-    'Сёмкин Кирилл Дмитриевич'
+    'Ахремчик Вадим ',
+    'Бесман Ярослав ',
+    'Беспалов Максим ',
+    'Буренков Кирилл ',
+    'Войтик Никита ',
+    'Горовцов Степан ',
+    'Дащинский Егор ',
+    'Заяц Александр',
+    'Клаповщук Илья',
+    'Клещиков Антон',
+    'Крючков Тимур',
+    'Курилович Никита',
+    'Ловицкая Анастасия ',
+    'Марышев Денис',
+    'Молокова Виктория ',
+    'Мостовой Артём',
+    'Оборин Даниил',
+    'Полубинский Кирилл',
+    'Сёмкин Кирилл',
   ];
 
   static const List<String> secondGroupList = [
-    'Николаевич Ангелина Ивановна',
-    'Пашковский Артём Николаевич',
-    'Поцейко Никита Андреевич',
-    'Прокопышко Никита Кириллович',
-    'Сазановец Станислав Игоревич',
-    'Самулёв Степан Вячеславович',
-    'Сарнавский Артём Геннадьевич',
-    'Свирко Анастасия Сергеевна',
-    'Секацкая Диана Игоревна',
-    'Сидорович Даниил Андреевич',
-    'Старовойтов Максим Игоревич',
-    'Филипеня Денис Александрович',
-    'Фурманов Михаил Дмитриевич',
-    'Чертков Константин Валентинович',
-    'Шарахай Алексей Олегович',
-    'Якимов Антон Русланович',
-    'Якимцев Никита Михайлович',
-    'Ярмоленко Максим Андреевич',
+    'Николаевич Ангелина',
+    'Пашковский Артём',
+    'Поцейко Никита',
+    'Прокопышко Никита',
+    'Сазановец Станислав',
+    'Самулёв Степан',
+    'Сарнавский Артём',
+    'Свирко Анастасия',
+    'Секацкая Диана',
+    'Сидорович Даниил',
+    'Старовойтов Максим',
+    'Филипеня Денис',
+    'Фурманов Михаил',
+    'Шарахай Алексей',
+    'Шкадун Павел',
+    'Якимов Антон',
+    'Якимцев Никита',
+    'Ярмоленко Максим',
   ];
+
+  static Map<int, String> fRating = {};
+  static Map<int, String> sRating = {};
 }
 
 class SelectGroup extends StatefulWidget {
@@ -58,17 +61,13 @@ class _SelectGroupState extends State<SelectGroup> {
 
   static Object? _value = 1;
 
-  void _onChanged(value)
-  {
+  void _onChanged(value) {
     setState(() {
       _value = value;
 
-      if(_value == 1)
-      {
+      if (_value == 1) {
         studentsList = Constants.firstGroupList;
-      }
-      else if(_value == 2)
-      {
+      } else if (_value == 2) {
         studentsList = Constants.secondGroupList;
       }
     });
@@ -77,21 +76,49 @@ class _SelectGroupState extends State<SelectGroup> {
   @override
   Widget build(BuildContext context) {
     return Align(
-      alignment: Alignment.center,
-      child: Container(
-        alignment: Alignment.center,
-        width: 300,
-        height: 300,
-        color: Colors.orange,
-        child: DropdownButton(value: _value,
-        items: [DropdownMenuItem(child: Text('ПОИТ-1'),
-        value: 1,),
-        DropdownMenuItem(child: Text('ПОИТ-2'),
-        value: 2,)],
-        onChanged: _onChanged,
+        child: Container(
+      decoration: BoxDecoration(
+          gradient: LinearGradient(
+              begin: Alignment.topRight,
+              end: Alignment.bottomLeft,
+              colors: [Colors.blue, Colors.red])),
+      width: 300,
+      height: 300,
+      child: Stack(children: [
+        Align(
+          alignment: Alignment(0, -0.9),
+          child: Text('Выберите группу', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 23, color: Colors.white),)
+          ),
+        Align(
+          alignment: Alignment.center,
+          child: DropdownButton(
+            dropdownColor: Colors.blue,
+            value: _value,
+            items: [
+              DropdownMenuItem(
+                child: Text(
+                  'ПОИТ-1',
+                  style: TextStyle(
+                      color: Colors.yellow,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold),
+                ),
+                value: 1,
+              ),
+              DropdownMenuItem(
+                child: Text('ПОИТ-2',
+                    style: TextStyle(
+                        color: Colors.yellow,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold)),
+                value: 2,
+              )
+            ],
+            onChanged: _onChanged,
+          ),
         )
-      ),
-    );
+      ]),
+    ));
   }
 }
 
@@ -101,7 +128,6 @@ class Students extends StatefulWidget {
 }
 
 class _StudentsState extends State<Students> {
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -125,7 +151,7 @@ class _RandomizerState extends State<Randomizer>
   List<Color> _colors = List<Color>.generate(
       8, (index) => index.isOdd ? Color(0xFFA953C4) : Color(0xFFD8D668));
   List<double> _stops = List<double>.generate(8, (index) => index * 0.2 - 0.4);
-
+  int numStudents = 0;
   late Animation<double> animation;
   late AnimationController controller;
 
@@ -150,33 +176,50 @@ class _RandomizerState extends State<Randomizer>
       });
     controller.forward();
   }
-   
+
+  void saveRating() async {}
+
   void _randomizer() {
-    
     List<String> studentsList = [];
 
-    int numStudents = 0;
-
-    if(_SelectGroupState._value == 1)
-    {
+    if (_SelectGroupState._value == 1) {
       numStudents = Random().nextInt(19);
       studentsList = Constants.firstGroupList;
-    }
-    else if(_SelectGroupState._value == 2)
-    {
+    } else if (_SelectGroupState._value == 2) {
       numStudents = Random().nextInt(18);
       studentsList = Constants.secondGroupList;
     }
 
+    saveRating();
     showDialog(
       context: context,
-      builder: (context) => Dialog(
+      builder: (context) => AlertDialog(
         backgroundColor: Colors.transparent,
-        child: SingleChildScrollView(
-          child: Container(
-              alignment: Alignment.topCenter,
-              child: IndexedStack(children: [Widgets.ourList(studentsList, numStudents)])),
+        content: Stack(
+          children: [
+            Container(
+                width: 300,
+                alignment: const Alignment(0, -0.05),
+                child: Widgets.ourList(studentsList, numStudents)),
+            Container(
+                alignment: const Alignment(0, 0.25),
+                child: ElevatedButton(
+                  child: const Text(
+                    'Ок',
+                    style: TextStyle(color: Colors.yellow, fontSize: 20),
+                  ),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(Colors.red),
+                      shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15))),
+                      fixedSize: MaterialStateProperty.all(Size(120, 40))),
+                ))
+          ],
         ),
+        elevation: 0,
       ),
     );
   }
@@ -186,28 +229,49 @@ class _RandomizerState extends State<Randomizer>
     return Stack(
       children: [
         Align(
-          alignment: Alignment(0, 0.5),
+          alignment: Alignment(0, -0.3),
           child: Container(
-              height: 50,
-              decoration: BoxDecoration(
-                  shape: BoxShape.rectangle,
-                  gradient: LinearGradient(
-                    colors: _colors,
-                    stops: _stops.map((s) => s + animation.value).toList(),
-                  )),
-              child: TextButton(
-                onPressed: () => setState(() {
-                  
-                  _randomizer();
-                }),
-                child: Text(
-                  'Сгенерировать',
-                  style: TextStyle(
-                      color: Color(0xFF66FF004),
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20),
+            width: 300,
+            height: 350,
+            color: Colors.orangeAccent[400],
+            child: Stack(
+              children: [
+                Align(
+                    alignment: Alignment(0, -0.9),
+                    child: Text(
+                      'Сгенерируйте студента',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 23,
+                          fontWeight: FontWeight.w900),
+                    )),
+                Align(
+                  alignment: Alignment(0, 0.2),
+                  child: Container(
+                      height: 50,
+                      decoration: BoxDecoration(
+                          shape: BoxShape.rectangle,
+                          gradient: LinearGradient(
+                            colors: _colors,
+                            stops:
+                                _stops.map((s) => s + animation.value).toList(),
+                          )),
+                      child: TextButton(
+                        onPressed: () => setState(() {
+                          _randomizer();
+                        }),
+                        child: Text(
+                          'Сгенерировать',
+                          style: TextStyle(
+                              color: Color(0xFF66FF004),
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20),
+                        ),
+                      )),
                 ),
-              )),
+              ],
+            ),
+          ),
         ),
       ],
     );
@@ -215,7 +279,15 @@ class _RandomizerState extends State<Randomizer>
 }
 
 class Widgets {
-  static Widget ourList(List studentsList, int index) {
+  static Widget ourList(List studentsList, int index, [String? text]) {
+    TextEditingController controller = TextEditingController();
+    if (_SelectGroupState._value == 1) {
+      if (Constants.fRating[index] != null)
+        controller.text = Constants.fRating[index]!;
+    } else if (_SelectGroupState._value == 2) {
+      if (Constants.sRating[index] != null)
+        controller.text = Constants.sRating[index]!;
+    }
     return Container(
         margin: EdgeInsets.all(8),
         child: ListTile(
@@ -232,6 +304,16 @@ class Widgets {
                 fontWeight: FontWeight.bold),
           ),
           subtitle: TextField(
+              onChanged: (value) {
+                if (_SelectGroupState._value == 1) {
+                  Constants.fRating[index] = controller.text;
+                  print(Constants.fRating);
+                } else {
+                  Constants.sRating[index] = controller.text;
+                  print(Constants.sRating);
+                }
+              },
+              controller: controller,
               decoration: InputDecoration(
                 hintText: 'Отметки',
                 hintStyle: TextStyle(color: Colors.red),
