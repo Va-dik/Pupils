@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pupils/pages.dart';
 
 void main() => runApp(MyApp());
+
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -18,14 +19,14 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _currentIndex = 0;
-  Color _appColor = Color(0xFFB5FFD1);
   Color _bgColor = Color(0xFFCCA4FF);
+  Color _bottomNavColor = Color(0xFFB5FFD1);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      backgroundColor: _appColor,
+      resizeToAvoidBottomInset: false, 
+      backgroundColor: _bottomNavColor,
       appBar: AppBar(
         backgroundColor: Colors.amber[300],
         title: Text(
@@ -36,7 +37,9 @@ class _HomePageState extends State<HomePage> {
         centerTitle: true,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
       ),
-      body: IndexedStack(index: _currentIndex, children: [SelectGroup(), Students(), Randomizer()]),
+      body: IndexedStack(
+          index: _currentIndex,
+          children: [SelectGroup(), Students(), Randomizer()]),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: _bgColor,
         selectedIconTheme: IconThemeData(size: 35),
@@ -47,9 +50,9 @@ class _HomePageState extends State<HomePage> {
         currentIndex: _currentIndex,
         items: [
           BottomNavigationBarItem(
-            icon: Icon(
-              Icons.list,
-              color: Color(0xFFAC6CFF),
+              icon: Icon(
+                Icons.list,
+                color: Color(0xFFAC6CFF),
               ),
               label: 'Группа'),
           BottomNavigationBarItem(
@@ -76,18 +79,18 @@ class _HomePageState extends State<HomePage> {
       switch (_currentIndex) {
         case 0:
           _bgColor = Color(0xFFCCA4FF);
-        _appColor = Color(0xFFB5FFD1);
+          _bottomNavColor = Color(0xFFB5FFD1);
           break;
 
         case 1:
-        _bgColor = Color(0xE0FF8E8E);
-        _appColor = Color(0xFFFFEFC2);
-        break;
+          _bgColor = Color(0xE0FF8E8E);
+          _bottomNavColor = Color(0xFFFFEFC2);
+          break;
 
         case 2:
-        _bgColor = Color(0xE079FFA1);
-        _appColor = Color(0xFFC2D7FF);
-        break;
+          _bgColor = Color(0xE079FFA1);
+          _bottomNavColor = Color(0xFFC2D7FF);
+          break;
       }
     });
   }
