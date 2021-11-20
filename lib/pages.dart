@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:pupils/students_list.dart';
 import 'dart:math';
 
-//  Сhoice of the group 
+//  Сhoice of the group
 
 class SelectGroup extends StatefulWidget {
   @override
@@ -112,17 +112,17 @@ class Randomizer extends StatefulWidget {
 
 class _RandomizerState extends State<Randomizer>
     with SingleTickerProviderStateMixin {
-
   int numStudents = 0;
 
   late AnimationController controller;
 
   @override
   void initState() {
-      controller = AnimationController(vsync: this, duration: Duration(milliseconds: 500));
-      controller.repeat(reverse: true);
-      super.initState();
-    }
+    controller =
+        AnimationController(vsync: this, duration: Duration(milliseconds: 500));
+    controller.repeat(reverse: true);
+    super.initState();
+  }
 
   void saveRating() async {}
 
@@ -196,21 +196,21 @@ class _RandomizerState extends State<Randomizer>
                 Align(
                   alignment: Alignment(0, 0.2),
                   child: FadeTransition(
-                    opacity: controller,
-                    child: MaterialButton(
+                      opacity: controller,
+                      child: MaterialButton(
                         height: 50,
                         color: Color(0xFF45FF20),
                         onPressed: () => setState(() {
-                            _randomizer();
-                          }),
-                          child: Text(
-                            'Сгенерировать',
-                            style: TextStyle(
-                                color: Colors.red,
-                                fontWeight: FontWeight.w900,
-                                fontSize: 20),
-                          ),
-                        )),
+                          _randomizer();
+                        }),
+                        child: Text(
+                          'Сгенерировать',
+                          style: TextStyle(
+                              color: Colors.red,
+                              fontWeight: FontWeight.w900,
+                              fontSize: 20),
+                        ),
+                      )),
                 ),
               ],
             ),
