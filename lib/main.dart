@@ -29,9 +29,9 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: _bottomNavColor,
       appBar: AppBar(
         backgroundColor: Colors.amber[300],
-        title: Text(
+        title: const Text(
           'Students Generator',
-          style: TextStyle(
+          style: const TextStyle(
               color: Colors.red, fontSize: 25, fontWeight: FontWeight.w900),
         ),
         centerTitle: true,
@@ -39,33 +39,43 @@ class _HomePageState extends State<HomePage> {
       ),
       body: IndexedStack(
           index: _currentIndex,
-          children: [SelectGroup(), Students(), Randomizer()]),
+          children: [AddStudent(), SelectGroup(), Students(), Randomizer()]),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: _bgColor,
-        selectedIconTheme: IconThemeData(size: 35),
+        selectedIconTheme: const IconThemeData(size: 35),
         selectedItemColor: Colors.blue,
-        selectedLabelStyle: TextStyle(fontWeight: FontWeight.bold),
+        selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
         unselectedFontSize: 14,
         onTap: _onTabTapped,
         currentIndex: _currentIndex,
         items: [
-          BottomNavigationBarItem(
+          const BottomNavigationBarItem(
+              icon: Icon(
+                Icons.group_add,
+                color: const Color(0xFFFFA86E),
+              ),
+              backgroundColor: Color(0xFFFFD86C),
+              label: "Добавить студента"),
+          const BottomNavigationBarItem(
               icon: Icon(
                 Icons.list,
-                color: Color(0xFFAC6CFF),
+                color: const Color(0xFFAC6CFF),
               ),
+              backgroundColor: const Color(0xFFD0AEFC),
               label: 'Группа'),
-          BottomNavigationBarItem(
+          const BottomNavigationBarItem(
               icon: Icon(
                 Icons.group,
-                color: Colors.red,
+                color: const Color(0xFF00AEBB),
               ),
+              backgroundColor: const Color(0xE06DE9FA),
               label: 'Учащиеся'),
-          BottomNavigationBarItem(
+          const BottomNavigationBarItem(
               icon: Icon(
                 Icons.shuffle,
-                color: Color(0xFF008B23),
+                color: const Color(0xFF008B23),
               ),
+              backgroundColor: const Color(0xE079FFA1),
               label: 'Рандомайзер'),
         ],
       ),
@@ -78,18 +88,19 @@ class _HomePageState extends State<HomePage> {
 
       switch (_currentIndex) {
         case 0:
-          _bgColor = Color(0xFFCCA4FF);
-          _bottomNavColor = Color(0xFFB5FFD1);
-          break;
-
-        case 1:
-          _bgColor = Color(0xE0FF8E8E);
           _bottomNavColor = Color(0xFFFFEFC2);
           break;
 
-        case 2:
-          _bgColor = Color(0xE079FFA1);
+        case 1:
           _bottomNavColor = Color(0xFFC2D7FF);
+          break;
+
+        case 2:
+          _bottomNavColor = Color(0xFFB4FCFF);
+          break;
+
+        case 3:
+          _bottomNavColor = Color(0xFFB5FFD1);
           break;
       }
     });

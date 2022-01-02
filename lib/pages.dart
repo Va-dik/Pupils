@@ -1,11 +1,29 @@
-import 'package:flutter/animation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:pupils/students_list.dart';
 import 'dart:math';
 
-//  Сhoice of the group
+class AddStudent extends StatefulWidget {
+  @override
+  _AddStudentState createState() => _AddStudentState();
+}
 
+class _AddStudentState extends State<AddStudent> {
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+        margin: EdgeInsets.all(10),
+        child: ListView(children: [
+          ListTile(
+            leading: Text("Фамилия"),
+          ),
+          ListTile(
+            leading: Text("Имя"),
+          )
+        ]));
+  }
+}
+
+//  Сhoice of the group
 class SelectGroup extends StatefulWidget {
   @override
   _SelectGroupState createState() => _SelectGroupState();
@@ -29,63 +47,49 @@ class _SelectGroupState extends State<SelectGroup> {
   }
 
   //  Gradient box
-
   @override
   Widget build(BuildContext context) {
-    return Align(
-        child: Container(
-      decoration: BoxDecoration(
-          gradient: LinearGradient(
-              begin: Alignment.topRight,
-              end: Alignment.bottomLeft,
-              colors: [Colors.blue, Colors.red])),
-      width: 300,
-      height: 300,
-      child: Stack(children: [
-        Align(
-            alignment: Alignment(0, -0.9),
-            child: Text(
-              'Выберите группу',
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 23,
-                  color: Colors.white70),
-            )),
-        Align(
-          alignment: Alignment.center,
-          child: DropdownButton(
-            dropdownColor: Colors.blue,
-            value: _value,
-            items: [
-              DropdownMenuItem(
-                child: Text(
-                  'ПОИТ-1',
-                  style: TextStyle(
+    return Stack(children: [
+      Align(
+          alignment: const Alignment(0, -0.9),
+          child: const Text(
+            'Выберите группу',
+            style: const TextStyle(
+                fontWeight: FontWeight.bold, fontSize: 23, color: Colors.black),
+          )),
+      Align(
+        alignment: const Alignment(0, -0.8),
+        child: DropdownButton(
+          dropdownColor: Colors.blue,
+          value: _value,
+          items: [
+            const DropdownMenuItem(
+              child: const Text(
+                'ПОИТ-1',
+                style: const TextStyle(
+                    color: Colors.yellow,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold),
+              ),
+              value: 1,
+            ),
+            const DropdownMenuItem(
+              child: const Text('ПОИТ-2',
+                  style: const TextStyle(
                       color: Colors.yellow,
                       fontSize: 20,
-                      fontWeight: FontWeight.bold),
-                ),
-                value: 1,
-              ),
-              DropdownMenuItem(
-                child: Text('ПОИТ-2',
-                    style: TextStyle(
-                        color: Colors.yellow,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold)),
-                value: 2,
-              )
-            ],
-            onChanged: _onChanged,
-          ),
-        )
-      ]),
-    ));
+                      fontWeight: FontWeight.bold)),
+              value: 2,
+            )
+          ],
+          onChanged: _onChanged,
+        ),
+      ),
+    ]);
   }
 }
 
 //  Students list
-
 class Students extends StatefulWidget {
   @override
   _StudentsState createState() => _StudentsState();
@@ -119,7 +123,7 @@ class _RandomizerState extends State<Randomizer>
   @override
   void initState() {
     controller =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 500));
+        AnimationController(vsync: this, duration: Duration(milliseconds: 400));
     controller.repeat(reverse: true);
     super.initState();
   }
