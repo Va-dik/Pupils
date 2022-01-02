@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pupils/students_list.dart';
+import 'package:flutter/services.dart';
 import 'dart:math';
 
 class AddStudent extends StatefulWidget {
@@ -8,18 +9,64 @@ class AddStudent extends StatefulWidget {
 }
 
 class _AddStudentState extends State<AddStudent> {
+  final _formKey = GlobalKey<FormState>();
+
+  void addStudent() {
+    //!!!!!! _SelectGroupState.studentsList.add(value);
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Card(
+    return Container(
         margin: EdgeInsets.all(10),
-        child: ListView(children: [
-          ListTile(
-            leading: Text("Фамилия"),
+        child: Form(
+            child: Form(
+          key: _formKey,
+          child: Column(
+            children: [
+              Text(
+                'Фамилия:',
+                style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.w900),
+              ),
+              TextFormField(
+                  inputFormatters: [
+                    FilteringTextInputFormatter.allow(RegExp("[a-zA-Z]"))
+                  ],
+                  textCapitalization: TextCapitalization.sentences,
+                  validator: (value) {
+                    if (value!.isEmpty) return "Введите фамилию студента";
+                  }),
+              const SizedBox(height: 20.0),
+              const Text(
+                'Имя:',
+                style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.w900),
+              ),
+              TextFormField(
+                  inputFormatters: [
+                    FilteringTextInputFormatter.allow(RegExp("[a-zA-Z]"))
+                  ],
+                  textCapitalization: TextCapitalization.sentences,
+                  validator: (value) {
+                    if (value!.isEmpty) return 'Введите имя студента';
+                  }),
+              const SizedBox(height: 20.0),
+              ElevatedButton(
+                onPressed: () {
+                  if (_formKey.currentState!.validate())
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      content: Text("Студент успешно добавлен.",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                              fontWeight: FontWeight.w500)),
+                      backgroundColor: Colors.blue,
+                    ));
+                },
+                child: Text('Проверить'),
+              ),
+            ],
           ),
-          ListTile(
-            leading: Text("Имя"),
-          )
-        ]));
+        )));
   }
 }
 
