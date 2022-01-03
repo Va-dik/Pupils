@@ -54,7 +54,7 @@ class _HomePageState extends State<HomePage> {
                 Icons.group_add,
                 color: const Color(0xFFFFA86E),
               ),
-              backgroundColor: Color(0xFFFFD86C),
+              backgroundColor: const Color(0xFFFFD86C),
               label: "Добавить студента"),
           const BottomNavigationBarItem(
               icon: Icon(

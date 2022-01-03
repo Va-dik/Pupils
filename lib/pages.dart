@@ -1,15 +1,74 @@
 import 'package:flutter/material.dart';
 import 'package:pupils/students_list.dart';
 import 'package:flutter/services.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:math';
 
 class AddStudent extends StatefulWidget {
+  AddStudent({Key? key}) : super(key: key);
   @override
   _AddStudentState createState() => _AddStudentState();
 }
 
 class _AddStudentState extends State<AddStudent> {
   final _formKey = GlobalKey<FormState>();
+
+  TextEditingController _todoController = TextEditingController();
+
+  bool _isLoading = false;
+
+  _saveList(list) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    prefs.setStringList("key", list);
+
+    return true;
+  }
+
+  _getSavedList() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    if (prefs.getStringList("key") != null)
+      _SelectGroupState.studentsList = prefs.getStringList("key")!;
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    setState(() {
+      _isLoading = true;
+    });
+    _getSavedList();
+
+    setState(() {
+      _isLoading = false;
+    });
+  }
+
+  Future<bool> _onWillPop() async {
+    return (await showDialog(
+          context: context,
+          builder: (context) => new AlertDialog(
+            backgroundColor: Colors.cyanAccent,
+            title: const Text('Вы уверены?'),
+            content: const Text('Вы хотите выйти?'),
+            actions: <Widget>[
+              new TextButton(
+                onPressed: () => Navigator.of(context).pop(false),
+                child: const Text('Нет'),
+              ),
+              new TextButton(
+                onPressed: () {
+                  _saveList(_SelectGroupState.studentsList);
+                  Navigator.of(context).pop(true);
+                },
+                child: const Text('Да'),
+              ),
+            ],
+          ),
+        )) ??
+        false;
+  }
 
   void addStudent() {
     //!!!!!! _SelectGroupState.studentsList.add(value);
@@ -30,7 +89,7 @@ class _AddStudentState extends State<AddStudent> {
               ),
               TextFormField(
                   inputFormatters: [
-                    FilteringTextInputFormatter.allow(RegExp("[a-zA-Z]"))
+                    FilteringTextInputFormatter.allow(RegExp("[а-яА-Яa-zA-Z]"))
                   ],
                   textCapitalization: TextCapitalization.sentences,
                   validator: (value) {
@@ -43,7 +102,7 @@ class _AddStudentState extends State<AddStudent> {
               ),
               TextFormField(
                   inputFormatters: [
-                    FilteringTextInputFormatter.allow(RegExp("[a-zA-Z]"))
+                    FilteringTextInputFormatter.allow(RegExp("[а-яА-Яa-zA-Z]"))
                   ],
                   textCapitalization: TextCapitalization.sentences,
                   validator: (value) {
