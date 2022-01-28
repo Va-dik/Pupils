@@ -121,7 +121,7 @@ class _AddStudentState extends State<AddStudent> {
                       backgroundColor: Colors.blue,
                     ));
                 },
-                child: Text('Проверить'),
+                child: Text('Добавить'),
               ),
             ],
           ),
@@ -136,23 +136,17 @@ class SelectGroup extends StatefulWidget {
 }
 
 class _SelectGroupState extends State<SelectGroup> {
-  static List<String> studentsList = Constants.firstGroupList;
+  static List<String> studentsList = Constants.firstStudentsList;
 
-  static int _value = 1;
+  static int _value = 0;
 
   void _onChanged(value) {
     setState(() {
       _value = value;
-
-      if (_value == 1) {
-        studentsList = Constants.firstGroupList;
-      } else if (_value == 2) {
-        studentsList = Constants.secondGroupList;
-      }
+      studentsList = Constants.groupList[_value];
     });
   }
 
-  //  Gradient box
   @override
   Widget build(BuildContext context) {
     return Stack(children: [
@@ -166,28 +160,20 @@ class _SelectGroupState extends State<SelectGroup> {
       Align(
         alignment: const Alignment(0, -0.8),
         child: DropdownButton(
-          dropdownColor: Colors.blue,
           value: _value,
-          items: [
-            const DropdownMenuItem(
-              child: const Text(
-                'ПОИТ-1',
-                style: const TextStyle(
-                    color: Colors.yellow,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold),
-              ),
-              value: 1,
-            ),
-            const DropdownMenuItem(
-              child: const Text('ПОИТ-2',
-                  style: const TextStyle(
-                      color: Colors.yellow,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold)),
-              value: 2,
-            )
-          ],
+          dropdownColor: Colors.blue,
+          items: List.generate(
+              Constants.groupName.length,
+              (index) => DropdownMenuItem(
+                    child: Text(
+                      Constants.groupName[index],
+                      style: TextStyle(
+                          color: Colors.yellow,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    value: index,
+                  )),
           onChanged: _onChanged,
         ),
       ),
@@ -239,13 +225,9 @@ class _RandomizerState extends State<Randomizer>
   void _randomizer() {
     List<String> studentsList = [];
 
-    if (_SelectGroupState._value == 1) {
-      numStudents = Random().nextInt(19);
-      studentsList = Constants.firstGroupList;
-    } else if (_SelectGroupState._value == 2) {
-      numStudents = Random().nextInt(18);
-      studentsList = Constants.secondGroupList;
-    }
+    numStudents =
+        Random().nextInt(Constants.groupList[_SelectGroupState._value].length);
+    studentsList = Constants.groupList[_SelectGroupState._value];
 
     saveRating();
     showDialog(
@@ -334,16 +316,17 @@ class _RandomizerState extends State<Randomizer>
 class Widgets {
   static Widget ourList(List studentsList, int index, [String? text]) {
     TextEditingController controller = TextEditingController();
-    if (_SelectGroupState._value == 1) {
+    if (_SelectGroupState._value == 0) {
       if (Constants.fRating[index] != null)
         controller.text = Constants.fRating[index]!;
-    } else if (_SelectGroupState._value == 2) {
+    } else if (_SelectGroupState._value == 1) {
       if (Constants.sRating[index] != null)
         controller.text = Constants.sRating[index]!;
     }
     return Container(
         margin: EdgeInsets.all(8),
         child: ListTile(
+          // Num student
           leading: Text(
             (index + 1).toString(),
             style: TextStyle(fontWeight: FontWeight.bold),
@@ -358,12 +341,11 @@ class Widgets {
           ),
           subtitle: TextField(
               onChanged: (value) {
-                if (_SelectGroupState._value == 1) {
+                // Move raiting in students list
+                if (_SelectGroupState._value == 0) {
                   Constants.fRating[index] = controller.text;
-                  print(Constants.fRating);
                 } else {
                   Constants.sRating[index] = controller.text;
-                  print(Constants.sRating);
                 }
               },
               controller: controller,

@@ -1,5 +1,5 @@
 class Constants {
-  static const List<String> firstGroupList = [
+  static const List<String> firstStudentsList = [
     'Ахремчик Вадим ',
     'Бесман Ярослав ',
     'Беспалов Максим ',
@@ -21,7 +21,7 @@ class Constants {
     'Сёмкин Кирилл',
   ];
 
-  static const List<String> secondGroupList = [
+  static const List<String> secondStudentsList = [
     'Николаевич Ангелина',
     'Пашковский Артём',
     'Поцейко Никита',
@@ -41,6 +41,16 @@ class Constants {
     'Якимцев Никита',
     'Ярмоленко Максим',
   ];
+
+  static List<List<String>> groupList = [firstStudentsList, secondStudentsList];
+
+  static List<String> groupName = ["ПОИТ-1", "ПОИТ-2"];
+
+  /*static void setGroup(String groupName) {
+    for (int i = 0; i < groupList.length; i++)
+      if (groupList[i] != groupName) groupList.add(groupName);
+  }
+  */
 
   static Map<int, String> fRating = {};
   static Map<int, String> sRating = {};
