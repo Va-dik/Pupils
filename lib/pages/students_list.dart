@@ -12,6 +12,7 @@ class _StudentsListState extends State<StudentsList> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: const EdgeInsets.symmetric(vertical: 8),
       color: const Color(0xFFC2D7FF),
       child: Column(
         children: [
